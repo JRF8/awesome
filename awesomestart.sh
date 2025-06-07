@@ -1,6 +1,6 @@
 #!/bin/bash
 
-picom &
+picom --backend xrender &
 setxkbmap -option caps:escape
 nitrogen --restore &
 
