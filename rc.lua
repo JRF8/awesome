@@ -409,6 +409,9 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "g", function()
 		awful.spawn.with_shell("flameshot gui")
 	end, { description = "screenshot with flameshot", group = "custom" }),
+	awful.key({}, "Print", function()
+		awful.spawn.with_shell("flameshot gui")
+	end, { description = "screenshot with flameshot", group = "custom" }),
 	awful.key({ modkey }, "w", function()
 		awful.spawn.with_shell("wallpaper")
 	end, { description = "set wallpaper", group = "custom" }),
