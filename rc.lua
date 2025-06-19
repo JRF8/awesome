@@ -205,6 +205,9 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		buttons = taglist_buttons,
+		style = {
+			shape = gears.shape.hexagon,
+		},
 	})
 
 	-- Create a tasklist widget
@@ -212,10 +215,13 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.currenttags,
 		buttons = tasklist_buttons,
+		style = {
+			shape = gears.shape.hexagon,
+		},
 	})
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8 })
+	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8, style = { shape = gears.shape.hexagon, }})
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
@@ -224,6 +230,7 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
 			mytextclock,
+			s.mytasklist,
 		},
 		{
 			-- Center widgets
@@ -233,12 +240,12 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			cpu_temp_widget:new({
-			      update_interval = 5, -- seconds
-			      critical_temp = 85, -- Celsius
-			      warning_temp = 75, -- Celsius
-			      -- temp_command = "sensors | grep 'Package id 0:' | awk '{print $4}' | tr -d '+°C'", -- adjust command if needed.
-			      critical_notification = true, -- enable critical notification
-			      warning_notification = true, --enable warning notification
+				update_interval = 5, -- seconds
+				critical_temp = 85, -- Celsius
+				warning_temp = 75, -- Celsius
+				-- temp_command = "sensors | grep 'Package id 0:' | awk '{print $4}' | tr -d '+°C'", -- adjust command if needed.
+				critical_notification = true, -- enable critical notification
+				warning_notification = true, --enable warning notification
 			}),
 			net_speed_widget(),
 			volume_widget({
@@ -252,19 +259,17 @@ awful.screen.connect_for_each_screen(function(s)
 				charging_color = "#00ff00",
 				medium_level_color = "#ffff00",
 				low_level_color = "#ff0000",
+                low_level = 20,
+                medium_level = 40,
 				size = 28,
 				font = "Play 12",
+                max_charge_value = 80,
 			}),
 			brightness_widget({
 				type = "arc",
 				size = 28,
 				program = "brightnessctl",
 				step = 2,
-			}),
-			keybright_widget({
-				type = "arc",
-				max_val = 255,
-				size = 28,
 			}),
 			-- mykeyboardlayout,
 			wibox.widget.systray(),
@@ -321,6 +326,10 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
+	-- Lock screen
+	awful.key({ modkey }, "z", function()
+		awful.spawn.with_shell("i3lock")
+	end, { description = "lock screen with i3lock", group = "custom" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
@@ -416,13 +425,13 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("wallpaper")
 	end, { description = "set wallpaper", group = "custom" }),
 	awful.key({ modkey, "Shift" }, "f", function()
-	    awful.spawn.with_shell("fnlock")
-	    naughty.notify({
-		title = "FN Lock toggled",
-		timeout = 2,
-		height = 20,
-		width = 300,
-	    })
+		awful.spawn.with_shell("fnlock")
+		naughty.notify({
+			title = "FN Lock toggled",
+			timeout = 2,
+			height = 20,
+			width = 300,
+		})
 	end, { description = "toggle FN Lock", group = "custom" })
 )
 
@@ -433,14 +442,14 @@ clientkeys = gears.table.join(
 	end, { description = "toggle fullscreen", group = "client" }),
 	awful.key({ modkey, "Shift" }, "c", function(c)
 		if c.class == "mpv" then
-		    naughty.notify({
-			title = "use Shift+Q to close MPV", 
-			timeout = 2,
-			height = 20,
-			width = 300,
-		    })
+			naughty.notify({
+				title = "use Shift+Q to close MPV",
+				timeout = 2,
+				height = 20,
+				width = 300,
+			})
 		else
-		    c:kill()
+			c:kill()
 		end
 	end, { description = "close", group = "client" }),
 	awful.key(
