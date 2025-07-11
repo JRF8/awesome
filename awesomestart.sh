@@ -8,4 +8,4 @@ if [ -f /usr/bin/gentoo-pipewire-launcher ]; then
 	pgrep pipewire || gentoo-pipewire-launcher &
 fi
 
-udiskie &
+pgrep udiskie || udiskie &
