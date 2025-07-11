@@ -326,13 +326,12 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
-	-- Lock screen
-	awful.key({ modkey }, "z", function()
-		awful.spawn.with_shell("i3lock")
-	end, { description = "lock screen with i3lock", group = "custom" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-
+--	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+    awful.key({ modkey, "Shift" }, "q", function()
+        awful.spawn.with_shell("pkill pipewire")
+        awesome.quit()
+    end, { description = "quit awesome", group = "awesome"}),
 	awful.key({ modkey }, "l", function()
 		awful.tag.incmwfact(0.05)
 	end, { description = "increase master width factor", group = "layout" }),
@@ -432,7 +431,12 @@ globalkeys = gears.table.join(
 			height = 20,
 			width = 300,
 		})
-	end, { description = "toggle FN Lock", group = "custom" })
+	end, { description = "toggle FN Lock", group = "custom" }),
+    	-- Lock screen
+	awful.key({ modkey }, "z", function()
+		awful.spawn.with_shell("i3lock -i $HOME/Pictures/i3lock-bg -L")
+	end, { description = "lock screen with i3lock", group = "custom" })
+
 )
 
 clientkeys = gears.table.join(
@@ -610,6 +614,7 @@ awful.rules.rules = {
 	{ rule = { class = "firefox" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "chromium" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false } },
+	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = "1", tag = "5" } },
 }
 -- }}}
 
