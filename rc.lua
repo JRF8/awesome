@@ -498,19 +498,22 @@ for i = 1, 9 do
 		globalkeys,
 		-- View tag only.
 		awful.key({ modkey }, "#" .. i + 9, function()
-			local screen = awful.screen.focused()
-			local tag = screen.tags[i]
-			if tag then
-				tag:view_only()
-			end
+          -- iterate through all screen
+          for s in screen do
+            local tag = s.tags[i]
+            if tag then
+              tag:view_only()
+            end
+          end
 		end, { description = "view tag #" .. i, group = "tag" }),
 		-- Toggle tag display.
 		awful.key({ modkey, "Control" }, "#" .. i + 9, function()
-			local screen = awful.screen.focused()
-			local tag = screen.tags[i]
-			if tag then
-				awful.tag.viewtoggle(tag)
-			end
+            for s in screen do
+              local tag = s.tags[i]
+              if tag then
+                awful.tag.viewtoggle(tag)
+              end
+            end
 		end, { description = "toggle tag #" .. i, group = "tag" }),
 		-- Move client to tag.
 		awful.key({ modkey, "Shift" }, "#" .. i + 9, function()
@@ -614,7 +617,8 @@ awful.rules.rules = {
 	{ rule = { class = "firefox" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "chromium" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false } },
-	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = "1", tag = "5" } },
+	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "5", fullscreen = false } },
+	{ rule = { class = "Virt-manager" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "6" } },
 }
 -- }}}
 
