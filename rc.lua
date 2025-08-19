@@ -32,6 +32,9 @@ local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed"
 -- cpu temp widget
 local cpu_temp_widget = require("awesome-wm-widgets.cputemp-widget.cpu_temp_widget")
 
+-- Desktop environment
+local desktop_env = os.getenv("XDG_CURRENT_DESKTOP")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -265,12 +268,12 @@ awful.screen.connect_for_each_screen(function(s)
 				font = "Play 12",
                 max_charge_value = 80,
 			}),
-			brightness_widget({
+			(desktop_env ~= "XFCE" and brightness_widget({
 				type = "arc",
 				size = 28,
 				program = "brightnessctl",
 				step = 2,
-			}),
+			}) or nil),
 			-- mykeyboardlayout,
 			wibox.widget.systray(),
 		},
@@ -329,8 +332,12 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 --	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
     awful.key({ modkey, "Shift" }, "q", function()
-        awful.spawn.with_shell("pkill pipewire")
-        awesome.quit()
+        if desktop_env == "XFCE" then
+          awful.spawn.with_shell("xfce4-session-logout")
+        else
+          awful.spawn.with_shell("pkill pipewire")
+          awesome.quit()
+        end
     end, { description = "quit awesome", group = "awesome"}),
 	awful.key({ modkey }, "l", function()
 		awful.tag.incmwfact(0.05)
@@ -434,8 +441,12 @@ globalkeys = gears.table.join(
 	end, { description = "toggle FN Lock", group = "custom" }),
     	-- Lock screen
 	awful.key({ modkey }, "z", function()
-		awful.spawn.with_shell("i3lock -i $HOME/Pictures/i3lock-bg -L")
-	end, { description = "lock screen with i3lock", group = "custom" })
+        if desktop_env == "XFCE" then
+          awful.spawn.with_shell("xflock4")
+        else 
+	      awful.spawn.with_shell("i3lock -i $HOME/Pictures/i3lock-bg -L")
+        end
+	end, { description = "lock the screen", group = "custom" })
 
 )
 
