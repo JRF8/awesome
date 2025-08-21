@@ -19,8 +19,8 @@ require("awful.hotkeys_popup.keys")
 
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
--- Pactl Widget
-local volume_widget = require("awesome-wm-widgets.pactl-widget.volume")
+-- Wpctl Widget
+local volume_widget = require("awesome-wm-widgets.wpctl-widget.volume")
 -- Battery Arc Widget
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 -- Brightness Widget
@@ -192,6 +192,12 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- Set up volume widget here
+local myvolume_widget = volume_widget({
+  widget_type = "arc",
+  size = 28,
+})
+
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
 	set_wallpaper(s)
@@ -251,10 +257,7 @@ awful.screen.connect_for_each_screen(function(s)
 				warning_notification = true, --enable warning notification
 			}),
 			net_speed_widget(),
-			volume_widget({
-				widget_type = "arc",
-				size = 28,
-			}),
+            myvolume_widget,
 			batteryarc_widget({
 				show_current_level = true,
 				arc_thickness = 2,
