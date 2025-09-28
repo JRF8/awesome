@@ -388,7 +388,11 @@ globalkeys = gears.table.join(
 	end, { description = "launch with Rofi", group = "launcher" }),
 	-- Resolution Script
 	awful.key({ modkey }, "r", function()
-		awful.spawn.with_shell("resolution")
+        if desktop_env == "XFCE" then
+          awful.spawn.with_shell("xfce4-display-settings")
+        else
+          awful.spawn.with_shell("resolution.sh")
+        end
 	end, { description = "Set Screen Resolution", group = "launcher" }),
 	-- pactl widget
 	awful.key({}, "XF86AudioRaiseVolume", function()
@@ -431,7 +435,7 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("flameshot gui")
 	end, { description = "screenshot with flameshot", group = "custom" }),
 	awful.key({ modkey }, "w", function()
-		awful.spawn.with_shell("wallpaper")
+		awful.spawn.with_shell("wallpaper.sh")
 	end, { description = "set wallpaper", group = "custom" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn.with_shell("fnlock")
