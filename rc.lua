@@ -35,6 +35,12 @@ local cpu_temp_widget = require("awesome-wm-widgets.cputemp-widget.cpu_temp_widg
 -- Desktop environment
 local desktop_env = os.getenv("XDG_CURRENT_DESKTOP")
 
+-- User home
+local homedir = os.getenv("HOME")
+
+-- Hide Wibar
+local hide_wibar = gears.filesystem.file_readable(homedir .. "/.hidewibar")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -229,8 +235,13 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	})
 
+    local wibox_visible = true
+    if hide_wibar then
+      wibox_visible = false
+    end
+
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8, style = { shape = gears.shape.hexagon, }})
+	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8, visible = wibox_visible, style = { shape = gears.shape.hexagon, }})
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
