@@ -646,6 +646,7 @@ awful.rules.rules = {
 	{ rule = { class = "firefox" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "chromium" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false } },
+	{ rule = { class = "obsidian" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "5", fullscreen = false } },
 	{ rule = { class = "Virt-manager" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "6" } },
 }
