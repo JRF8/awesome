@@ -402,7 +402,7 @@ globalkeys = gears.table.join(
         if desktop_env == "XFCE" then
           awful.spawn.with_shell("xfce4-display-settings")
         else
-          awful.spawn.with_shell("resolution.sh")
+          awful.spawn.with_shell("~/.local/bin/resolution.sh")
         end
 	end, { description = "Set Screen Resolution", group = "launcher" }),
 	-- pactl widget
@@ -446,7 +446,7 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("flameshot gui")
 	end, { description = "screenshot with flameshot", group = "custom" }),
 	awful.key({ modkey }, "w", function()
-		awful.spawn.with_shell("wallpaper.sh")
+		awful.spawn.with_shell("~/.local/bin/wallpaper.sh")
 	end, { description = "set wallpaper", group = "custom" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn.with_shell("fnlock")
@@ -648,7 +648,7 @@ awful.rules.rules = {
 	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "obsidian" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "5", fullscreen = false } },
-	{ rule = { class = "Virt-manager" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "6" } },
+	{ rule = { class = "Virt-viewer" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "6" } },
 }
 -- }}}
 
