@@ -282,7 +282,7 @@ awful.screen.connect_for_each_screen(function(s)
 				font = "Play 12",
                 max_charge_value = 80,
 			}),
-			(desktop_env ~= "XFCE" and brightness_widget({
+			(brightness_widget({
 				type = "arc",
 				size = 28,
 				program = "brightnessctl",
