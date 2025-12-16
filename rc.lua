@@ -448,6 +448,12 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "w", function()
 		awful.spawn.with_shell("~/.local/bin/wallpaper.sh")
 	end, { description = "set wallpaper", group = "custom" }),
+    awful.key({ modkey }, "b", function()
+        awful.spawn.with_shell("google-chrome-stable --user-data-dir=~/.config/google-chrome --class=google-chrome")
+    end, { description = "Google Chrome" }),
+    awful.key({ modkey }, "y", function()
+        awful.spawn.with_shell("google-chrome-stable --new-window --user-data-dir=~/.config/google-chrome-youtube --class=youtube --app=https://youtube.com")
+    end, { description = "Youtube" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn.with_shell("fnlock")
 		naughty.notify({
@@ -645,7 +651,8 @@ awful.rules.rules = {
 	-- Rule to fix issue where Firefox does not tile
 	{ rule = { class = "firefox" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "chromium" }, properties = { opacity = 1, maximized = false, floating = false } },
-	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false } },
+	{ rule = { class = "google-chrome" }, properties = { opacity = 1, maximized = false, floating = false, tag = "2" } },
+	{ rule = { class = "youtube" }, properties = { opacity = 1, maximized = false, floating = false, tag = "4" } },
 	{ rule = { class = "obsidian" }, properties = { opacity = 1, maximized = false, floating = false } },
 	{ rule = { class = "xfreerdp" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "5", fullscreen = false } },
 	{ rule = { class = "Virt-viewer" }, properties = { opacity = 1, maximized = false, floating = true, screen = 1, tag = "6" } },
