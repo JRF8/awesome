@@ -425,6 +425,19 @@ globalkeys = gears.table.join(
 	awful.key({}, "XF86AudioPrev", function()
 		awful.spawn.with_shell("playerctl previous")
 	end, { description = "previous song", group = "custom" }),
+  -- Alternate keys for audio switching
+	awful.key({ modkey, "Shift" }, "Up", function()
+		awful.spawn.with_shell("playerctl play")
+	end, { description = "play", group = "custom" }),
+	awful.key({ modkey, "Shift" }, "Down", function()
+		awful.spawn.with_shell("playerctl pause")
+	end, { description = "pause", group = "custom" }),
+	awful.key({ modkey, "Shift" }, "Right", function()
+		awful.spawn.with_shell("playerctl next")
+	end, { description = "next song", group = "custom" }),
+	awful.key({ modkey, "Shift" }, "Left", function()
+		awful.spawn.with_shell("playerctl previous")
+	end, { description = "previous song", group = "custom" }),
 	-- brightness widget
 	awful.key({}, "XF86MonBrightnessUp", function()
 		brightness_widget:inc()
