@@ -267,7 +267,7 @@ awful.screen.connect_for_each_screen(function(s)
 				critical_notification = true, -- enable critical notification
 				warning_notification = true, --enable warning notification
 			}),
-			net_speed_widget(),
+			--net_speed_widget(),
             myvolume_widget,
 			batteryarc_widget({
 				show_current_level = true,
