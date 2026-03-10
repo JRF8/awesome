@@ -261,11 +261,11 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			cpu_temp_widget:new({
 				update_interval = 5, -- seconds
-				critical_temp = 85, -- Celsius
-				warning_temp = 75, -- Celsius
+				critical_temp = 95, -- Celsius
+				warning_temp = 85, -- Celsius
 				-- temp_command = "sensors | grep 'Package id 0:' | awk '{print $4}' | tr -d '+°C'", -- adjust command if needed.
 				critical_notification = true, -- enable critical notification
-				warning_notification = true, --enable warning notification
+				warning_notification = false, --enable warning notification
 			}),
 			--net_speed_widget(),
             myvolume_widget,
