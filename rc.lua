@@ -655,6 +655,17 @@ awful.rules.rules = {
 		properties = { floating = true },
 	},
 
+    -- Xfce Desktop needs to be sticky so it is on all tags
+    { rule = { class = "Xfdesktop" },
+      properties = { 
+          sticky = true,
+          border_width = 0,
+          floating = true,
+          on_top = false,
+          below = true
+      }
+    },
+
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
