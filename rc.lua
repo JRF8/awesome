@@ -249,13 +249,13 @@ awful.screen.connect_for_each_screen(function(s)
 		expand = "none",
 		{ -- Left widgets
 			layout = wibox.layout.fixed.horizontal,
-			mytextclock,
+			s.mytaglist,
 			s.mytasklist,
 		},
 		{
 			-- Center widgets
 			layout = wibox.layout.fixed.horizontal,
-			s.mytaglist,
+			mytextclock,
 		},
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
