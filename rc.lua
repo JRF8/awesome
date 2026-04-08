@@ -241,7 +241,7 @@ awful.screen.connect_for_each_screen(function(s)
     end
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8, visible = wibox_visible, style = { shape = gears.shape.hexagon, }})
+	s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.8, visible = wibox_visible, style = { shape = gears.shape.hexagon, }, ontop = true, })
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
@@ -480,7 +480,7 @@ globalkeys = gears.table.join(
 	awful.key({ modkey }, "z", function()
         if desktop_env == "XFCE" then
           awful.spawn.with_shell("xflock4")
-        else 
+        else
 	      awful.spawn.with_shell("i3lock -i $HOME/Pictures/i3lock-bg -L")
         end
 	end, { description = "lock the screen", group = "custom" })
@@ -657,7 +657,7 @@ awful.rules.rules = {
 
     -- Xfce Desktop needs to be sticky so it is on all tags
     { rule = { class = "Xfdesktop" },
-      properties = { 
+      properties = {
           sticky = true,
           border_width = 0,
           floating = true,
