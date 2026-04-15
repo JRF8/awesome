@@ -74,7 +74,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/themes/" .. "default/theme.lua")
+beautiful.init("$HOME/.config/awesome/themes/" .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -402,7 +402,7 @@ globalkeys = gears.table.join(
         if desktop_env == "XFCE" then
           awful.spawn.with_shell("xfce4-display-settings")
         else
-          awful.spawn.with_shell("~/.local/bin/resolution.sh")
+          awful.spawn.with_shell("$HOME/.local/bin/resolution.sh")
         end
 	end, { description = "Set Screen Resolution", group = "launcher" }),
 	-- pactl widget
@@ -459,13 +459,13 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("flameshot gui")
 	end, { description = "screenshot with flameshot", group = "custom" }),
 	awful.key({ modkey }, "w", function()
-		awful.spawn.with_shell("~/.local/bin/wallpaper.sh")
+		awful.spawn.with_shell("$HOME/.local/bin/wallpaper.sh")
 	end, { description = "set wallpaper", group = "custom" }),
     awful.key({ modkey }, "b", function()
-        awful.spawn.with_shell("google-chrome-stable --user-data-dir=~/.config/google-chrome --class=google-chrome")
+        awful.spawn.with_shell("google-chrome-stable --user-data-dir=$HOME/.config/google-chrome --class=google-chrome")
     end, { description = "Google Chrome" }),
     awful.key({ modkey }, "y", function()
-        awful.spawn.with_shell("google-chrome-stable --new-window --user-data-dir=~/.config/google-chrome-youtube --class=youtube --app=https://youtube.com")
+        awful.spawn.with_shell("google-chrome-stable --new-window --user-data-dir=$HOME/.config/google-chrome-youtube --class=youtube --app=https://youtube.com")
     end, { description = "Youtube" }),
 	awful.key({ modkey, "Shift" }, "f", function()
 		awful.spawn.with_shell("fnlock")
